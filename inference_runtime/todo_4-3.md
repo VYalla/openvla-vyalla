@@ -1,0 +1,33 @@
+# TODO 4-3-25 
+
+- the run inference script was created to run inference on a single image (after downloading the openvla model) 
+- make a new repo to put the inference script and run it 
+- need to use the libero dataset (it is located at /home/vishal/Documents/openvla_testv1/LIBERO/libero/datasets) 
+    - (or find a way to get a sample image to test with  
+- use windsurf to run the run_inference script with cmd `python run_inference.py --image_path <path_to_image> --instruction <instruction>`
+- afterwards run the libero eval scripts to test performance on dataset 
+- next steps => figure out how to intergate the 'framework' paper methods into these models (aka figure out the internal workings)
+
+
+# TODO 4-7-25
+
+- data from the libero dataset was saved to /home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos 
+- use sample images from that, and use it to run_inference.py 
+    - this will give understanding of what the vla-action model outputs 
+- use the conformal prediction code/method from the "robots that ask for help" paper, and figure out where to insert it in the inference pipeline 
+```
+-> when running the inference, are you running a model or a pipeline?
+
+
+Based on the code in the run_inference.py script, you are running a model rather than a pipeline. Specifically, you're using the OpenVLA model (openvla/openvla-7b by default) through the Hugging Face Transformers library.
+
+The key components showing this is a model-based approach:
+
+1) You're loading a specific model using AutoModelForVision2Seq.from_pretrained()
+2) You're using a processor from the same model using AutoProcessor.from_pretrained()
+
+3) The inference is performed directly with the model via the vla.predict_action() method
+
+This is a single model approach rather than a pipeline that would typically involve multiple models or processing steps chained together. The script loads the model, processes the input image and instruction, and then directly generates the action prediction in a single forward pass.
+```
+so will have to look at other ways to inject the conformal prediction method into the inference pipeline 
