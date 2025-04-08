@@ -31,3 +31,11 @@ The key components showing this is a model-based approach:
 This is a single model approach rather than a pipeline that would typically involve multiple models or processing steps chained together. The script loads the model, processes the input image and instruction, and then directly generates the action prediction in a single forward pass.
 ```
 so will have to look at other ways to inject the conformal prediction method into the inference pipeline 
+
+
+# TODO 4-8-25
+
+play around with the run_sim script, here is the cmd used : conda activate libero && python run_sim.py --model_name "openvla/openvla-7b" --instruction "pick up the cube" --device "cuda:0" 
+- make it so it picks the object up sucessfully (maybe use a general prompt instead of action specfic)
+
+then go to the next part to use the conformal prediction methods

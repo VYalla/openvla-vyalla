@@ -30,7 +30,7 @@ def main():
     # Load model with appropriate settings
     vla = AutoModelForVision2Seq.from_pretrained(
         args.model_name,
-        attn_implementation="flash_attention_2" if device.startswith("cuda") else None,
+        attn_implementation=None,  # Disable flash attention
         torch_dtype=torch.bfloat16 if device.startswith("cuda") else torch.float32,
         low_cpu_mem_usage=True,
         trust_remote_code=True
