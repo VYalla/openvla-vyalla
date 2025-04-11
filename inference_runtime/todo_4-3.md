@@ -39,3 +39,14 @@ play around with the run_sim script, here is the cmd used : conda activate liber
 - make it so it picks the object up sucessfully (maybe use a general prompt instead of action specfic)
 
 then go to the next part to use the conformal prediction methods
+
+# TODO 4-10-25
+
+to run the inference locally with log text, use: 
+```
+python inference_runtime/run_local_inference.py --image_path /home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png --instruction "pick up the ketchup bottle" --checkpoint_path /home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt
+```
+
+next steps: 
+- study the conformal prediction methods
+- ideneify what exactly the llm is outputing (use the log.txt that is outputed in the local run), and how to inject the cp method into it 

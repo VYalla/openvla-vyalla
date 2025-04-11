@@ -1,0 +1,3 @@
+2025-04-10 15:18:32,514 - INFO - === OpenVLA Local Inference Started ===
+2025-04-10 15:18:32,514 - INFO - Arguments: {'image_path': '/home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png', 'instruction': 'pick up the ketchup bottle', 'checkpoint_path': '/home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt', 'device': 'cuda:0', 'log_file': 'openvla_inference_20250410_151832.txt'}
+2025-04-10 15:18:32,514 - INFO - Importing model components...

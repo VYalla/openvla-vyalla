@@ -1,0 +1,11 @@
+2025-04-10 15:37:30,637 - INFO - === OpenVLA Local Inference Started ===
+2025-04-10 15:37:30,637 - INFO - === OpenVLA Local Inference Started ===
+2025-04-10 15:37:30,637 - INFO - Arguments: {'image_path': '/home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png', 'instruction': 'pick up the ketchup bottle', 'checkpoint_path': '/home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt', 'device': 'cuda:0', 'log_file': 'openvla_detailed_execution_20250410_153730.txt'}
+2025-04-10 15:37:30,637 - INFO - Arguments: {'image_path': '/home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png', 'instruction': 'pick up the ketchup bottle', 'checkpoint_path': '/home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt', 'device': 'cuda:0', 'log_file': 'openvla_detailed_execution_20250410_153730.txt'}
+2025-04-10 15:37:30,637 - INFO - Importing model components...
+2025-04-10 15:37:30,637 - INFO - Importing model components...
+2025-04-10 15:37:31,959 - DEBUG - Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+2025-04-10 15:37:32,020 - DEBUG - Creating converter from 7 to 5
+2025-04-10 15:37:32,020 - DEBUG - Creating converter from 5 to 7
+2025-04-10 15:37:32,020 - DEBUG - Creating converter from 7 to 5
+2025-04-10 15:37:32,020 - DEBUG - Creating converter from 5 to 7

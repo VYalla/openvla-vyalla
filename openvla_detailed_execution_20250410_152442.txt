@@ -1,0 +1,20 @@
+2025-04-10 15:24:42,143 - INFO - === OpenVLA Local Inference Started ===
+2025-04-10 15:24:42,143 - INFO - === OpenVLA Local Inference Started ===
+2025-04-10 15:24:42,143 - INFO - Arguments: {'image_path': '/home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png', 'instruction': 'pick up the ketchup bottle', 'checkpoint_path': '/home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt', 'device': 'cuda:0', 'log_file': 'openvla_detailed_execution_20250410_152442.txt'}
+2025-04-10 15:24:42,143 - INFO - Arguments: {'image_path': '/home/vishal/Documents/openvla_testv1/LIBERO/vyalla_scripts/all_demos/ketchup/episode_demo_44/frame_0002.png', 'instruction': 'pick up the ketchup bottle', 'checkpoint_path': '/home/vishal/Documents/openvla_testv1/openvla-vyalla/checkpoints/openvla-7b-prismatic/checkpoints/step-295000-epoch-40-loss=0.2200.pt', 'device': 'cuda:0', 'log_file': 'openvla_detailed_execution_20250410_152442.txt'}
+2025-04-10 15:24:42,143 - INFO - Importing model components...
+2025-04-10 15:24:42,143 - INFO - Importing model components...
+
+
+===== STARTING MODEL LOADING =====
+
+
+
+===== MODEL STRUCTURE =====
+
+Model type: OpenVLA
+Model device: cpu
+Vision backbone: DinoSigLIPViTBackbone
+LLM backbone: LLaMa2LLMBackbone
+Action tokenizer: ActionTokenizer
+Normalization stats keys: ['fractal20220817_data', 'kuka', 'bridge_orig', 'taco_play', 'jaco_play', 'berkeley_cable_routing', 'roboturk', 'viola', 'berkeley_autolab_ur5', 'toto', 'stanford_hydra_dataset_converted_externally_to_rlds', 'austin_buds_dataset_converted_externally_to_rlds', 'nyu_franka_play_dataset_converted_externally_to_rlds', 'furniture_bench_dataset_converted_externally_to_rlds', 'ucsd_kitchen_dataset_converted_externally_to_rlds', 'austin_sailor_dataset_converted_externally_to_rlds', 'austin_sirius_dataset_converted_externally_to_rlds', 'dlr_edan_shared_control_converted_externally_to_rlds', 'iamlab_cmu_pickup_insert_converted_externally_to_rlds', 'utaustin_mutex', 'berkeley_fanuc_manipulation', 'cmu_stretch', 'bc_z', 'fmb_dataset', 'dobbe']

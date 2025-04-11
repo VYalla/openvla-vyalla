@@ -66,8 +66,16 @@ class PurePromptBuilder(PromptBuilder):
         human_message = self.wrap_human(message)
         prompt_copy += human_message
 
-        return prompt_copy.removeprefix(self.bos).rstrip()
+        # Compatible with Python 3.8 (no removeprefix)
+        if prompt_copy.startswith(self.bos):
+            prompt_copy = prompt_copy[len(self.bos):]
+        return prompt_copy.rstrip()
 
     def get_prompt(self) -> str:
         # Remove prefix <bos> (if exists) because it gets auto-inserted by tokenizer!
-        return self.prompt.removeprefix(self.bos).rstrip()
+        # Compatible with Python 3.8 (no removeprefix)
+        if self.prompt.startswith(self.bos):
+            result = self.prompt[len(self.bos):]
+        else:
+            result = self.prompt
+        return result.rstrip()

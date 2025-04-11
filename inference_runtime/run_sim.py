@@ -63,24 +63,46 @@ def main():
         if i < num_joints and p.getJointInfo(robot_id, i)[2] != p.JOINT_FIXED:
             p.resetJointState(robot_id, i, pose)
     
-    # Add a cube for manipulation tasks
+    # Add cubes for manipulation tasks
     cube_size = 0.05
     cube_mass = 0.1
-    cube_visual_id = p.createVisualShape(
+    
+    # Red cube
+    red_cube_visual_id = p.createVisualShape(
         shapeType=p.GEOM_BOX,
         halfExtents=[cube_size/2, cube_size/2, cube_size/2],
-        rgbaColor=[1, 0, 0, 1]
+        rgbaColor=[1, 0, 0, 1]  # Red color
     )
-    cube_collision_id = p.createCollisionShape(
+    red_cube_collision_id = p.createCollisionShape(
         shapeType=p.GEOM_BOX,
         halfExtents=[cube_size/2, cube_size/2, cube_size/2]
     )
-    cube_id = p.createMultiBody(
+    red_cube_id = p.createMultiBody(
         baseMass=cube_mass,
-        baseCollisionShapeIndex=cube_collision_id,
-        baseVisualShapeIndex=cube_visual_id,
-        basePosition=[0.5, 0, cube_size/2]
+        baseCollisionShapeIndex=red_cube_collision_id,
+        baseVisualShapeIndex=red_cube_visual_id,
+        basePosition=[0.3, 0.3, cube_size/2]
     )
+    
+    # Green cube
+    green_cube_visual_id = p.createVisualShape(
+        shapeType=p.GEOM_BOX,
+        halfExtents=[cube_size/2, cube_size/2, cube_size/2],
+        rgbaColor=[0, 1, 0, 1]  # Green color
+    )
+    green_cube_collision_id = p.createCollisionShape(
+        shapeType=p.GEOM_BOX,
+        halfExtents=[cube_size/2, cube_size/2, cube_size/2]
+    )
+    green_cube_id = p.createMultiBody(
+        baseMass=cube_mass,
+        baseCollisionShapeIndex=green_cube_collision_id,
+        baseVisualShapeIndex=green_cube_visual_id,
+        basePosition=[0.5, -0.2, cube_size/2]
+    )
+    
+    # Set the main cube for manipulation (the red one by default)
+    cube_id = red_cube_id
     
     # Set up camera position for better view of the Franka arm
     p.resetDebugVisualizerCamera(
@@ -246,7 +268,7 @@ def main():
             rgb_array = np.reshape(rgb_img, (height, width, 4))[:,:,:3]
             image = Image.fromarray(rgb_array)
             
-            # Use more detailed, specific prompts for each grasping state
+            # Use a single comprehensive prompt with all necessary details
             cube_pos, _ = p.getBasePositionAndOrientation(cube_id)
             end_pos, _ = p.getLinkState(robot_id, end_effector_index)[:2]
             
@@ -255,32 +277,25 @@ def main():
             # Calculate horizontal distance (xy-plane only)
             horizontal_dist = np.linalg.norm(np.array([end_pos[0], end_pos[1]]) - np.array([cube_pos[0], cube_pos[1]]))
             
-            if grasp_state == "APPROACH":
-                prompt = (f"In: The robot needs to pick up a cube at position {cube_pos}. " 
-                          f"The gripper is currently at position {end_pos}, {distance_to_cube:.2f} units away. "
-                          f"What precise action should the robot take to move its gripper generally toward the cube?\nOut:")
-            elif grasp_state == "POSITION":
-                prompt = (f"In: The robot needs to precisely position for grasping. "
-                          f"IMPORTANT: The gripper must be fully opened with claws maximally extended. "
-                          f"Position the gripper directly above the center of the cube at {cube_pos}, "
-                          f"with a small gap ready for grasping. Current horizontal distance is {horizontal_dist:.3f} units. "
-                          f"What precise action will center the gripper perfectly over the cube with claws fully open?\nOut:")
-            elif grasp_state == "GRASP":
-                prompt = (f"In: The robot's gripper is now positioned directly above the cube at {cube_pos}. "
-                          f"The gripper claws are fully extended and open. "
-                          f"IMPORTANT: Now close the gripper claws completely around the cube "
-                          f"with maximum force to establish a very secure grip. "
-                          f"What specific action should the robot take to close the gripper with maximum force?\nOut:")
-            elif grasp_state == "LIFT":
-                prompt = (f"In: The robot has grasped the cube with its gripper at position {cube_pos}. "
-                          f"IMPORTANT: Maintain the maximum grip strength with fully closed claws during the entire lifting motion. "
-                          f"The cube is currently {cube_pos[2]:.2f} units above the ground. "
-                          f"What precise action should the robot take to lift the cube higher while ensuring "
-                          f"the gripper maintains a solid, unwavering grip throughout the motion?\nOut:")
-            else:  # DONE
-                prompt = (f"In: The robot has successfully lifted the cube to position {cube_pos}. "
-                          f"What action should the robot take to maintain a stable grip on the cube "
-                          f"while moving it to a new position?\nOut:")
+            # Create a single detailed prompt that covers the entire pick-up process
+            prompt = (f"In: Pick up the red cube. "
+                     #f"The gripper is currently at position {end_pos}, {distance_to_cube:.2f} units away from the cube. "
+                     #f"The horizontal distance between the gripper and cube is {horizontal_dist:.3f} units. "
+                     #f"The cube is {cube_pos[2]:.2f} units above the ground. "
+                     #f"Current grasp state is: {grasp_state}. "
+                     
+                     #f"Follow these steps precisely to pick up the cube: "
+                     #f"1. APPROACH: Move the gripper toward the cube's general position. "
+                     #f"2. POSITION: Center the gripper perfectly over the cube with claws fully open (at maximum extension). "
+                     #f"   Position it at a small gap above the cube ready for grasping. "
+                     #f"3. GRASP: Close the gripper claws completely around the cube with maximum force to establish a very secure grip. "
+                     #f"4. LIFT: Maintain maximum grip strength while raising the cube higher. "
+                     #f"5. HOLD: Keep a stable grip on the cube while moving it. "
+                     
+                     #f"Based on the current robot state and position, provide precise action parameters to continue the pick-up task. "
+                     #f"The action should be appropriate for the current grasp state ({grasp_state}). "
+                     #f"Remember that precise positional accuracy is critical for successful grasping. "
+                     f"\nOut:")
                 
             print(f"\nGrasp state: {grasp_state}")
             print(f"Using prompt: {prompt}")
